@@ -10,7 +10,14 @@ use Illuminate\Support\Carbon;
  */
 class MonthlyPeriodInterval implements IPeriodInterval
 {
+    /**
+     * @var string month precision
+     */
     const PRECISION_MONTH = 'month';
+
+    /**
+     * @var string day precision
+     */
     const PRECISION_DAY = 'day';
 
     /**
@@ -30,22 +37,27 @@ class MonthlyPeriodInterval implements IPeriodInterval
      * @var Carbon $now the date from which the period is determined
      */
     private $now;
+
     /**
      * @var string $precision the precision
      */
     private $precision;
+
     /**
      * @var int $period number of months in the generated period
      */
     private $period;
+
     /**
      * @var Carbon $start Start of the interval
      */
     private $start;
+
     /**
      * @var Carbon $end End of the interval
      */
     private $end;
+
     /**
      * Period's inner intervals that are by default distinguished by month.
      *
@@ -58,6 +70,13 @@ class MonthlyPeriodInterval implements IPeriodInterval
      */
     private $hasInnerIntervals;
 
+    /**
+     * MonthlyPeriodInterval constructor.
+     *
+     * @param int $period
+     * @param string $precision
+     * @param Carbon|null $now
+     */
     private function __construct(int $period, string $precision, Carbon $now = null)
     {
         if ($now === null) {
@@ -151,7 +170,6 @@ class MonthlyPeriodInterval implements IPeriodInterval
         $this->init();
     }
 
-
     /**
      * Initialises start and end date and creates
      * inner intervals if the period is longer than 1 month
@@ -170,7 +188,6 @@ class MonthlyPeriodInterval implements IPeriodInterval
             $this->hasInnerIntervals = false;
         }
     }
-
 
     /**
      * Sets the start date
@@ -208,7 +225,6 @@ class MonthlyPeriodInterval implements IPeriodInterval
             $this->end = $end;
         }
     }
-
 
     /**
      * Sets the monthly intervals for periods longer than 1 month.
